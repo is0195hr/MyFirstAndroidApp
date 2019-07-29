@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
+        Button button3 = findViewById(R.id.button3);
         final EditText input_weight = findViewById(R.id.editTextWeight);
         final EditText input_height = findViewById(R.id.editTextHeight);
         final TextView viewBMI = findViewById(R.id.textView);
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     viewExplain.setText("肥満気味です");
                 }
-                saveFile(filename,str_weight,str_height,str_bmi);
+
             }
         });
 
@@ -80,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String str_weight = input_weight.getText().toString();
+                String str_height = input_height.getText().toString();
+                String str_bmi = viewBMI.getText().toString();
+                saveFile(filename,str_weight,str_height,str_bmi);
+            }
+        });
     }
     public void saveFile(String file, String w, String h, String b){
         try {
@@ -91,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             fileOutputStream.write(",".getBytes());
 
             fileOutputStream.write(b.getBytes());
+
         }catch (IOException e){
             e.printStackTrace();
         }
